@@ -1,0 +1,88 @@
+CREATE DATABASE  IF NOT EXISTS `CodoACOdo` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `CodoACodo`;
+-- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
+--
+-- Host: localhost    Database: sakila
+-- ------------------------------------------------------
+-- Server version	5.7.18-log
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `Alumno`
+--
+DROP TABLE IF EXISTS `Alumno`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Alumno` (
+  `id` int(5) unsigned NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(45) NOT NULL,
+  `apellido` varchar(45) NOT NULL,
+  `dni`int NOT NULL,
+  `legajo` varchar(45) NOT NULL,
+  `id_colegio` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idx_Alumno_id_colegio` (`id_colegio`)
+) ENGINE=InnoDB AUTO_INCREMENT=201 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `colegio`
+--
+DROP TABLE IF EXISTS `colegio`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Colegio` (
+  `id` int(5) unsigned NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(45) NOT NULL,
+  `direccion` varchar(45) NOT NULL,
+  `id_barrio`smallint NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idx_Alumno_id_barrio` (`id_barrio`)
+) ENGINE=InnoDB AUTO_INCREMENT=201 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `barrio`
+--
+DROP TABLE IF EXISTS `barrio`;
+
+CREATE TABLE `barrio` (
+  `id` smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ;
+
+INSERT INTO ALUMNO VALUES (1,JOSE,CHACALACA,45678901,JCHACALACA,1);
+INSERT INTO ALUMNO VALUES (2,AGUSTIN,PEREZ,433333901,JCHACALACA,2);
+INSERT INTO ALUMNO VALUES (3,PEDRO,GOMEZ,49971141,JCHACALACA,3);
+
+INSERT INTO COLEGIO VALUES (1,JOSE,CHACALACA,45678901,JCHACALACA,1);
+
+USE CodoACodo;
+
+DELIMITER $$
+CREATE PROCEDURE TraerAlumnoPorId (IN id_alumno INT)
+BEGIN
+ SELECT* FROM alumno WHERE id=id_alumno;
+END$$
+DELIMITER;
+
+DELIMITER $$
+CREATE PROCEDURE TraerAlumnoPorApellido (IN Apellido varchar(10))
+BEGIN
+ SELECT* FROM alumno WHERE id=id;
+END$$
+DELIMITER;
+
+
+CALL TraerAlumnoPorApellido(1);

@@ -1,0 +1,30 @@
+2) D
+
+3)
+public class contables {
+ private int id_empleado;
+ private String nombre;
+ public contables(String nombre,int id_empleado){
+ this.nombre=nombre;
+ this.id_empleado=id_empleado;
+ }
+ public String getNombre(){
+ return nombre;
+ }
+ public void setNombre(String nombre){
+ this.nombre = nombre;
+ }
+}
+public class contablesCasaCentral extends contables {
+ public contablesCasaCentral(String nombre,int id_empleado){
+ super(nombre); // ERROR seria asi--> super(nombre,id_empleado)
+ }
+ }
+
+4) B
+
+5)
+Select E.id_empleado, E.id_cargo, C.valor_hora, C.valor_hora_extra
+From tablas.Empleado as E
+Inner Join tablas.Cargo as C on C.id_cargo=E.id_cargo
+Where id_cargo>=1 AND id_cargo<=5 AND id_cargo>=20 AND id_cargo<=28;
